@@ -1,13 +1,10 @@
 {-# LANGUAGE RankNTypes #-}
 
-
-
-module Utils.Managed where
+module Control.Monad.Managed where
 
 import           Control.Monad.Logger
 import           Control.Monad.Trans  (MonadIO, MonadTrans (..), liftIO)
 import           Control.Monad.Trans  as Trans
-import           Prelude
 
 data ManagedT m a = ManagedT { (>>-) :: forall r. (a -> m r) -> m r }
 
