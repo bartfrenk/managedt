@@ -1,0 +1,104 @@
+name: auth-service
+version: 0.1.0
+github: "githubuser/hs-bidwiser-backend"
+license: BSD3
+author: "Author name here"
+maintainer: "example@example.com"
+copyright: "2018 Author name here"
+
+extra-source-files:
+- README.md
+- ChangeLog.md
+
+description: >-
+  Please see the README on GitHub at
+  <https://github.com/githubuser/hs-bidwiser-backend#readme>
+
+default-extensions:
+  - DataKinds
+  - DeriveGeneric
+  - NamedFieldPuns
+  - LambdaCase
+  - MultiWayIf
+  - FlexibleInstances
+  - GeneralizedNewtypeDeriving
+  - MultiParamTypeClasses
+  - OverloadedStrings
+  - NoImplicitPrelude
+  - ConstraintKinds
+
+dependencies:
+  - base >= 4.7 && < 5
+  - protolude
+  - monad-logger
+  - time
+  - exceptions
+  - aeson
+  - bytestring
+
+library:
+  ghc-options:
+    - -Wall
+  source-dirs: src
+  dependencies:
+    - servant
+    - servant
+    - servant-server
+    - servant-swagger
+    - servant-swagger-ui
+    - servant-swagger-ui-core
+    - servant-swagger-ui-jensoleg
+    - servant-swagger-ui-redoc
+    - swagger2
+    - persistent
+    - persistent-template
+    - persistent-postgresql
+    - authenticate-oauth
+    - text
+    - warp
+    - mtl
+    - auth-service-api
+    - resource-pool
+    - unliftio-core
+
+executables:
+
+  auth-service:
+    main: Main.hs
+    source-dirs: apps/server
+    ghc-options:
+      - -Wall
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+    dependencies:
+
+      - auth-service
+      - managed
+      - easy-conf
+
+  auth-migrate:
+    main: Main.hs
+    source-dirs: apps/migrate
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - auth-service
+    - persistent-sqlite
+    - persistent-postgresql
+    - managed
+    - easy-conf
+
+tests:
+
+  auth-service-tests:
+    main: Spec.hs
+    source-dirs: test
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+    dependencies:
+    - hs-bidwiser-backend
